@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - master
     tags:
       - 'v*.*.*'
   workflow_dispatch: # Allows manual trigger from GitHub Actions tab
@@ -33,7 +32,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/ultraformat
+          # Change "ultraformat-custom" to whatever repository name you want in Docker Hub
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/ultraformat-custom
           tags: |
             type=raw,value=latest,enable=${{ github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master' }}
             type=semver,pattern={{version}}
